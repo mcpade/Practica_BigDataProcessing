@@ -4,7 +4,7 @@
 
 En esta práctica se utilizará el lenguaje de programación **Scala**, el motor **Spark** y el entorno de desarrollo IDE **IntelliJ** 
 
-El fichero practica_espia.zip contiene todo el proyecto generado desde el IDE IntelliJ.
+El fichero **practica_espia.zip** contiene todo el proyecto generado desde el IDE IntelliJ.
 
 Conceptos que se tratan en esta práctica
 
