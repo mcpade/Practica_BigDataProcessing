@@ -106,5 +106,56 @@ Fuente de datos y esquema:
 - Investigación y ensayo autodidacta de Scala
 
         
+# Desarrollo
 
+Para esta práctica he decidido separar la parte de procesamiento de los mensajaes de la red social, de la parte de análisis de relaciones de los usuarios. He creado por tanto dos paquetes diferentes con sus correspondientes clases objeto.
+
+## Procesamiento Palabras
+
+1.- En este objeto ProcesoEspia2App voy a ir analizando los mensajes de la red social Celebram que me llegan gracias a una red de IOTs. Para simular este envío de datos de los IOTs utilizo el fichero "mensajes.csv" que he dejado en la carpeta data del proyecto, pero que realmente no forma parte del proyecto, sino que está aquí para que se guarde en algún otro directorio y se utilice desde el cliente en linea de comandos Kafka para, mandarlo como mensajes hacia
+el cluster Kafka:
+
+  > bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic celebram
+  > bin/kafka-console-producer.sh --broker-list localhost:9092 --topic celebram < /Documents/mensajes.csv
+
+Otra opción hubiera sido tener un fichero de mensajes por cada dispositivo iot pero he decidido mejor tener un único fichero y meter el campo Iot_Id para identificar de donde viene el mensaje.
+
+El análisis se realiza en ventanas de 1 hora, por lo que durante ese tiempo se puede simular.la recepción de los diferentes mensajes haciendo un envío del fichero "mesajes.csv" varias veces.durante esa hora.
+
+
+  2.- La estructura del fichero de mensajes es:
+  
+  Mensaje_Id,Iot_Id,Usuario_Origen_Id,Usuario_Destiono_Id,Contenido
+
+  He introducido el Usuario Origen y Destino por si se necesitara hacer algún procesamiento adicional en base a relaciones
+
+  3.- Un segundo fichero que utilizaré será el fichero "iot.csv" que realmente para el procesamiento de palabras no hace falta, pero lo voy a unir a la fuente de datos de mensajes por si a futuro hiciera falta algún procesamiento adicional
+
+La estructura de ese fichero es:
+
+IoT_Id,Encendido,Zona_Id
+
+  4.- El tercer fichero utilizado es "usuarios.csv" que tampoco se necesita para el procesamiento de palabras pero
+  igualmente voy a unir a la fuente pricipal por si hicera falta para un futuro procesamiento
+  
+  La estrucutra de este fichero es:
+  
+  User_Id,Nombre,Apellido,Edad,Sexo,Username
+
+
+El objetivo es hallar por hora las 10 palabras mas usadas y, caso de que la palabra más repetida coincida con alguna de las palabras de una lista negra, se mande una notificación al ministro
+
+
+NOTA1: En el sbt he utilizado las versiones 2.4.0 debido a que he querido utilizar .foreachBath para el WriteStream y según leí en la documentación se añadió en la versión 2.4. Sé que se comentó que podía tener algún bug pero de momento para lo que he estado haciendo parece funcionar bien.
+
+NOTA2: Los mensajes del fichero mensajes.csv están puestos para que la palabra mas repetida sea tramaX que está dentro
+de la lista negra, por lo que se mandaría el aviso.
+
+NOTA 3: La ventana temporal de consulta es de 1 hora y así está configurado, pero el trigger está puesto cada 20 segundos, aunque también tendría que ser 1 hora. Así para la revisión de la práctica se puede ver el resultado antes. He dejado la línea de los 3600 segundos comentada y esa sería la que tendría que ir en la versión de producción.
+
+  //.trigger(Trigger.ProcessingTime("30 second"))
+  trigger(Trigger.ProcessingTime("3600 second"))
+
+NOTA4: Estoy mostrando como añadido la estructura de los mensajes capturados junto con los datos de los iots y de usuarios.
+Esto tiene puesto un trigger de 10 segundos. Simplemente lo he dejado para la revisión de la estructura. Es algo que se quitaría en la versión de producción
 
