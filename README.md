@@ -116,6 +116,7 @@ Para esta práctica he decidido separar la parte de procesamiento de los mensaja
 el cluster Kafka:
 
   > bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic celebram
+  
   > bin/kafka-console-producer.sh --broker-list localhost:9092 --topic celebram < /Documents/mensajes.csv
 
 Otra opción hubiera sido tener un fichero de mensajes por cada dispositivo iot pero he decidido mejor tener un único fichero y meter el campo Iot_Id para identificar de donde viene el mensaje.
