@@ -160,3 +160,21 @@ de la lista negra, por lo que se mandaría el aviso.
 
 **NOTA4**: Estoy mostrando como añadido la estructura de los mensajes capturados junto con los datos de los iots y de usuarios. Esto tiene puesto un trigger de 10 segundos. Simplemente lo he dejado para la revisión de la estructura. Es algo que se quitaría en la versión de producción
 
+## GraphX
+
+En este  objeto AnalisisGraphXApp voy a obtener las relaciones existentes entre los usuarios de la red social.
+Para ello tomo como entradas dos ficheros que tiene el gobierno y que están incluidos en el directorio
+data creado para el proyecto:
+
+- usuarios.csv: Contiene los datos de los usuarios de la red social y se esctructura así
+                id,Nombre,Apellido,Edad,Sexo,Username
+                
+- relaciones.csv: Contiene datos sobre las relaciones conocidas y se estructura así
+                Origen_Id,Destino_Id,Tipo_Conexion
+
+Posteriormente en el código se verán los tipos de datos de cada estructura
+
+Una vez tengo los datos de entrada utilizaré GraphX para crear un grafo sobre el que extraeré la información de las relaciones usando los algoritmos Connected Components y  PageRank
+
+Finalmente los resultados se guardarán en ficheros txt en el directorio Output.
+
