@@ -45,24 +45,62 @@ De vosotros, como desarrolladores Big Data, se requiere…
 ### Fuentes de datos y esquemas propuestos (orientativo):
 
  **MensajesCapturados:** 
+ 
         Mensaje_Id (String)
+        
         Contenido (String)
+        
         User_Id (String)
- Usuarios registrados: 
- User_Id (String)
- Nombre (String)
- Apellido (String)
- Edad (Int)
- Sexo (String)
+        
+ **Usuarios registrados:**
+ 
+        User_Id (String)
+        
+        Nombre (String)
+        
+        Apellido (String)
+        
+        Edad (Int)
+        
+        Sexo (String)
+
+**Dispositivos IOT:** 
+
+        IoT_Id
+        
+        Encendido(Bool)
+        
+        Zona_Id (String)
+        
+ **ListaNegraPalabras(*):** 
+ 
+        Palabra (String)
+        
+        
+### Parte opcional
 
 
-Dispositivos IOT: 
+Si queréis cobrar un plus por vuestro trabajo, deberéis extraer la información de cómo se ‘relacionan’ en la red social algunos de los usuarios (GraphX).
 
+Fuente de datos y esquema: 
 
-IoT_Id
- Encendido(Bool)
- Zona_Id (String)
- ListaNegraPalabras(*): 
- Palabra (String)
+**Conexiones:** 
+
+   Origen_Id (String) 
+   
+   Destino_Id (String)
+   
+   Tipo_Conexion (String)
+   
+## Se valorará...
+
+- Claridad en el código
+- Favorecer la legibilidad por encima de un código compacto
+- El correcto uso de las APIs sql
+- Explicación (comentada en el propio código) el porqué de cada una de las decisiones tomadas
+- Uso preferido de spark sql, aunque no obligatorio 
+- Investigación y ensayo autodidacta de Scala
+
+        
 
 
