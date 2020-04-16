@@ -13,7 +13,7 @@ Conceptos que se tratan en esta práctica
 - GraphX - Gestión de datos almacenados como grafos (redes sociales)
 
 
-#Enunciado de la práctica
+# Enunciado de la práctica
 
 ### Contexto:
 Siglo XXIII, los ciudadanos y sus comunicaciones son espiados por el Gobierno de un país un tanto particular.
